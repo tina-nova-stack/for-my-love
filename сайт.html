@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7efe1">
+<title>С днём рождения, пуся! 🎂💕</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --cream: #f7efe1;
+    --cream-dark: #ecdfc9;
+    --red: #c4302b;
+    --red-deep: #8b1a17;
+    --red-soft: #e07570;
+    --text-dark: #4a1f1c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  /* ---------- ПАДАЮЩИЕ СЕРДЕЧКИ ---------- */
+  .hearts {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .heart {
+    position: absolute;
+    color: var(--red);
+    font-size: 20px;
+    opacity: 0.5;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ---------- ОБЩИЕ СЕКЦИИ ---------- */
+  section {
+    position: relative;
+    z-index: 2;
+    padding: clamp(50px, 8vw, 80px) clamp(16px, 4vw, 25px);
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ---------- ГЛАВНЫЙ ЭКРАН ---------- */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(25px, 5vw, 50px);
+    padding-top: clamp(40px, 8vh, 60px);
+    padding-bottom: clamp(40px, 8vh, 60px);
+  }
+
+  .hero-content {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 620px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.7rem, 6vw, 4rem);
+    color: var(--red-deep);
+    margin-bottom: clamp(15px, 3vw, 25px);
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .hero h1 .accent {
+    font-style: italic;
+    background: linear-gradient(90deg, var(--red), var(--red-deep), var(--red));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s ease-in-out infinite;
+  }
+
+  @keyframes shine {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+  }
+
+  .hero p {
+    font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+    color: #6b3a36;
+    margin-bottom: clamp(12px, 2vw, 20px);
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .hero-sub {
+    display: inline-block;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--red-soft);
+    font-style: normal;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ---------- ФОТО СБОКУ ---------- */
+  .hero-photo {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: clamp(15px, 3vw, 30px);
+  }
+
+  .photo-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: min(420px, 90vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    box-shadow: clamp(15px, 2vw, 25px) clamp(15px, 2vw, 25px) clamp(40px, 5vw, 60px) rgba(139, 26, 23, 0.35),
+                -10px -10px 40px rgba(196, 48, 43, 0.15);
+    transform: rotate(4deg);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: floatPhoto 6s ease-in-out infinite;
+  }
+
+  @keyframes floatPhoto {
+    0%, 100% { transform: rotate(4deg) translateY(0); }
+    50% { transform: rotate(2deg) translateY(-15px); }
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .photo-frame::after {
+    content: '🤍';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    z-index: 2;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+  }
+
+  .photo-tape {
+    position: absolute;
+    width: clamp(60px, 12vw, 90px);
+    height: clamp(20px, 4vw, 28px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 4;
+    backdrop-filter: blur(3px);
+    border-left: 2px dashed rgba(255,255,255,0.5);
+    border-right: 2px dashed rgba(255,255,255,0.5);
+  }
+  .tape-left { top: -15px; left: -20px; transform: rotate(-45deg); }
+  .tape-right { top: -15px; right: -20px; transform: rotate(45deg); }
+
+  .photo-sticker {
+    position: absolute;
+    bottom: 20px;
+    left: -12px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    filter: drop-shadow(0 5px 8px rgba(0,0,0,0.35));
+    z-index: 5;
+    transform: rotate(-15deg);
+    animation: pulse 2.5s infinite;
+  }
+
+  .photo-note {
+    position: absolute;
+    top: 20px;
+    left: -25px;
+    background: #fff;
+    padding: clamp(6px, 1.2vw, 10px) clamp(12px, 2vw, 18px);
+    border-radius: 20px 20px 20px 0;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--red-deep);
+    font-size: clamp(0.75rem, 1.3vw, 0.95rem);
+    box-shadow: 0 8px 20px rgba(139, 26, 23, 0.25);
+    border: 2px solid var(--red-soft);
+    z-index: 6;
+    transform: rotate(-3deg);
+    white-space: nowrap;
+    max-width: 90%;
+  }
+  .photo-note::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -12px;
+    width: 0; height: 0;
+    border-top: 12px solid #fff;
+    border-left: 12px solid transparent;
+    filter: drop-shadow(-2px 2px 2px rgba(139, 26, 23, 0.1));
+  }
+
+  .photo-badge {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    background: var(--red-deep);
+    color: #fff;
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 20px);
+    border-radius: 50px;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(139, 26, 23, 0.45);
+    border: 3px solid #fff;
+    transform: rotate(-8deg);
+    z-index: 5;
+    animation: pulse 3s ease-in-out infinite;
+    white-space: nowrap;
+  }
+
+  .photo-caption {
+    margin-top: clamp(18px, 3vw, 25px);
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: var(--red-deep);
+    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: clamp(8px, 1.5vw, 12px) clamp(18px, 3vw, 28px);
+    background: #fff;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(139, 26, 23, 0.18);
+    border: 2px dashed var(--red-soft);
+    animation: floatCaption 4s ease-in-out infinite;
+    text-align: center;
+  }
+
+  @keyframes floatCaption {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-5px) rotate(1deg); }
+  }
+
+  .photo-caption .caption-heart {
+    color: var(--red);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .photo-decor {
+    position: absolute;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--red);
+    opacity: 0.7;
+    z-index: 3;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  .photo-decor.d1 { top: -20px; left: 0px; animation-delay: 0s; }
+  .photo-decor.d2 { bottom: 90px; right: -10px; animation-delay: 1s; font-size: clamp(1.1rem, 2vw, 1.8rem); }
+  .photo-decor.d3 { bottom: 0px; left: 15px; animation-delay: 2s; font-size: clamp(1rem, 1.8vw, 1.5rem); }
+  .photo-decor.d4 { top: 35%; right: -15px; animation-delay: 0.5s; font-size: clamp(1.1rem, 2vw, 1.6rem); }
+  .photo-decor.d5 { top: 55%; left: -15px; animation-delay: 1.5s; font-size: clamp(1rem, 1.8vw, 1.4rem); }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .scroll-hint {
+    color: var(--red);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    animation: bounce 2s infinite;
+    margin-top: clamp(15px, 3vw, 30px);
+    display: inline-block;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(15px); }
+  }
+
+  /* ---------- РАЗДЕЛИТЕЛЬ ---------- */
+  .divider {
+    text-align: center;
+    color: var(--red-soft);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    letter-spacing: clamp(8px, 2vw, 15px);
+    padding: 20px 0;
+    opacity: 0.7;
+  }
+
+  /* ---------- СЧЁТЧИК ---------- */
+  .counter-section { text-align: center; }
+
+  .section-title {
+    font-size: clamp(1.4rem, 4.5vw, 2.6rem);
+    color: var(--red-deep);
+    margin-bottom: 15px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-style: italic;
+    color: #8b504c;
+    margin-bottom: clamp(30px, 5vw, 45px);
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    padding: 0 10px;
+  }
+
+  .counter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 2vw, 20px);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .counter-item {
+    background: #fff;
+    border: 2px solid var(--cream-dark);
+    border-radius: 16px;
+    padding: clamp(18px, 3vw, 28px) clamp(10px, 2vw, 15px);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .counter-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red-soft), var(--red));
+  }
+
+  @media (hover: hover) {
+    .counter-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(196, 48, 43, 0.2);
+      border-color: var(--red-soft);
+    }
+  }
+
+  .counter-num {
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: bold;
+    color: var(--red-deep);
+    display: block;
+    font-family: 'Courier New', monospace;
+    line-height: 1;
+  }
+
+  .counter-label {
+    font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+    color: #8b504c;
+    margin-top: 10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* ---------- ВРЕМЕННАЯ ШКАЛА ---------- */
+  .timeline {
+    position: relative;
+    padding: 20px 0;
+    margin-top: 20px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--red), var(--red), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 45px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+  .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+  .timeline-item::after {
+    content: '♥';
+    position: absolute;
+    top: 25px;
+    width: 34px;
+    height: 34px;
+    background: var(--red);
+    border: 3px solid var(--cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    box-shadow: 0 0 0 3px var(--red-soft);
+    z-index: 3;
+  }
+
+  .timeline-item:nth-child(odd)::after { right: -17px; }
+  .timeline-item:nth-child(even)::after { left: -17px; }
+
+  .timeline-card {
+    background: #fff;
+    border: 1px solid var(--cream-dark);
+    border-radius: 16px;
+    padding: clamp(16px, 3vw, 22px) clamp(18px, 3vw, 25px);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 20px rgba(139, 26, 23, 0.08);
+  }
+
+  @media (hover: hover) {
+    .timeline-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 30px rgba(196, 48, 43, 0.2);
+    }
+  }
+
+  .timeline-date {
+    color: var(--red);
+    font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .timeline-card h3 {
+    color: var(--red-deep);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+
+  .timeline-card p {
+    color: #6b3a36;
+    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ---------- ГАЛЕРЕЯ (4 В РЯД ВСЕГДА) ---------- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(8px, 1.5vw, 18px);
+    margin-top: 20px;
+    perspective: 1200px;
+  }
+
+  .flip-card {
+    background-color: transparent;
+    width: 100%;
+    aspect-ratio: 1;
+    cursor: pointer;
+  }
+
+  .flip-card:nth-child(odd) .flip-card-inner { transform: rotate(-2deg); }
+  .flip-card:nth-child(even) .flip-card-inner { transform: rotate(2deg); }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    transform-style: preserve-3d;
+    border-radius: 12px;
+  }
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg) !important;
+  }
+
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(139, 26, 23, 0.25);
+    border: 3px solid #fff;
+  }
+
+  .flip-card-front {
+    background: linear-gradient(135deg, var(--red-soft), var(--red-deep));
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(4px, 1vw, 10px);
+    padding: 8px;
+  }
+
+  .flip-card-front .icon {
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+    animation: pulse 2s infinite;
+    line-height: 1;
+  }
+
+  .flip-card-front span {
+    font-size: clamp(0.55rem, 1.4vw, 0.75rem);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .flip-card-back {
+    background-color: #f7efe1;
+    transform: rotateY(180deg);
+    position: relative;
+  }
+
+  .flip-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .flip-card-back::after {
+    content: '🔍';
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.85);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  @media (hover: hover) {
+    .flip-card-back:hover img { transform: scale(1.1); }
+    .flip-card-back:hover::after { opacity: 1; }
+  }
+
+  /* ---------- ЛАЙТБОКС ---------- */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(26, 11, 46, 0.95);
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+
+  .lightbox.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .lightbox-content {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(255, 77, 141, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    object-fit: contain;
+  }
+
+  .lightbox.active .lightbox-content {
+    transform: scale(1);
+  }
+
+  .close {
+    position: absolute;
+    top: max(15px, env(safe-area-inset-top));
+    right: 20px;
+    color: #fff;
+    font-size: clamp(35px, 6vw, 45px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+    line-height: 1;
+    padding: 5px 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (hover: hover) {
+    .close:hover {
+      color: var(--red-soft);
+      transform: scale(1.2);
+    }
+  }
+
+  /* ---------- ЗАПИСКИ ЛЮБВИ ---------- */
+  .love-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(15px, 2.5vw, 22px);
+    margin-top: 20px;
+  }
+
+  .note {
+    background: #fff;
+    color: var(--text-dark);
+    padding: clamp(20px, 3.5vw, 28px) clamp(18px, 3vw, 25px);
+    border-radius: 4px 20px 4px 20px;
+    font-style: italic;
+    line-height: 1.7;
+    position: relative;
+    transform: rotate(-1deg);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(139, 26, 23, 0.15);
+    border-left: 5px solid var(--red);
+    font-size: clamp(0.9rem, 1.4vw, 0.98rem);
+  }
+
+  .note:nth-child(even) {
+    transform: rotate(1.5deg);
+    border-left: none;
+    border-right: 5px solid var(--red);
+    border-radius: 20px 4px 20px 4px;
+  }
+
+  @media (hover: hover) {
+    .note:hover {
+      transform: rotate(0) scale(1.04);
+      box-shadow: 0 15px 40px rgba(196, 48, 43, 0.25);
+    }
+  }
+
+  .note::before {
+    content: '💌';
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 12px;
+    font-style: normal;
+  }
+
+  /* ---------- ФИНАЛЬНАЯ СЕКЦИЯ ---------- */
+  .finale {
+    text-align: center;
+    padding-bottom: clamp(80px, 15vw, 120px);
+  }
+
+  .finale h2 {
+    font-size: clamp(1.5rem, 5.5vw, 3rem);
+    color: var(--red-deep);
+    margin-bottom: clamp(20px, 4vw, 30px);
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  .finale h2 .accent {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .surprise-btn {
+    margin-top: clamp(25px, 5vw, 45px);
+    padding: clamp(15px, 2.5vw, 20px) clamp(30px, 5vw, 50px);
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+    font-family: inherit;
+    background: var(--red-deep);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    box-shadow: 0 12px 30px rgba(139, 26, 23, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    text-transform: uppercase;
+    width: auto;
+    max-width: 100%;
+  }
+
+  @media (hover: hover) {
+    .surprise-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 45px rgba(196, 48, 43, 0.6);
+      background: var(--red);
+    }
+  }
+
+  .surprise-message {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease, opacity 0.5s ease;
+    color: var(--red-deep);
+    font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+    font-style: italic;
+    line-height: 1.8;
+    opacity: 0;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 clamp(10px, 3vw, 30px);
+  }
+
+  .surprise-message.show {
+    max-height: 800px;
+    margin-top: 40px;
+    opacity: 1;
+    padding: clamp(20px, 4vw, 30px);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(139, 26, 23, 0.15);
+    border: 2px dashed var(--red-soft);
+  }
+
+  /* ---------- ДЕКОР ФОНА ---------- */
+  .bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-blob.b1 {
+    top: 10%; right: -10%;
+    width: clamp(250px, 40vw, 400px);
+    height: clamp(250px, 40vw, 400px);
+    background: rgba(224, 117, 112, 0.25);
+  }
+  .bg-blob.b2 {
+    bottom: 20%; left: -15%;
+    width: clamp(300px, 50vw, 500px);
+    height: clamp(300px, 50vw, 500px);
+    background: rgba(196, 48, 43, 0.12);
+  }
+
+  /* ============================================================
+     АДАПТИВНОСТЬ
+     ============================================================ */
+
+  /* --- Планшет / узкий десктоп: 1024px и меньше --- */
+  @media (max-width: 1024px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      min-height: auto;
+      padding-top: clamp(60px, 12vh, 100px);
+      padding-bottom: clamp(40px, 8vh, 60px);
+      gap: clamp(40px, 8vw, 60px);
+    }
+    .hero-content {
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-photo {
+      width: 100%;
+      max-width: 400px;
+    }
+    .photo-wrapper { max-width: 100%; }
+  }
+
+  /* --- Планшет вертикально / большой телефон: 768px и меньше --- */
+  @media (max-width: 768px) {
+    .hero h1 { letter-spacing: 0; }
+    .photo-decor.d4, .photo-decor.d5 { display: none; }
+
+    /* Таймлайн — вертикально с линией слева */
+    .timeline::before { left: 20px; }
+    .timeline-item {
+      width: 100% !important;
+      left: 0 !important;
+      text-align: left !important;
+      padding: 20px 15px 20px 60px;
+    }
+    .timeline-item::after {
+      left: 3px !important;
+      right: auto !important;
+    }
+  }
+
+  /* --- Телефон: 600px и меньше --- */
+  @media (max-width: 600px) {
+    section { padding: clamp(45px, 9vw, 65px) 16px; }
+
+    .photo-badge {
+      font-size: 0.6rem;
+      padding: 6px 10px;
+      top: -10px;
+      right: -10px;
+      letter-spacing: 1px;
+      border-width: 2px;
+    }
+    .photo-note {
+      left: -10px;
+      top: 12px;
+      font-size: 0.68rem;
+      padding: 5px 9px;
+    }
+    .photo-sticker {
+      left: -6px;
+      font-size: 1.8rem;
+      bottom: 12px;
+    }
+    .photo-tape { width: 50px; height: 16px; }
+    .tape-left { left: -10px; }
+    .tape-right { right: -10px; }
+    .photo-caption {
+      font-size: 0.75rem;
+      padding: 7px 14px;
+      gap: 5px;
+    }
+    .photo-caption .caption-heart { font-size: 0.7rem; }
+
+    /* Галерея — 4 в ряд, компактнее */
+    .gallery {
+      gap: 6px;
+    }
+    .flip-card-front {
+      gap: 3px;
+      padding: 4px;
+    }
+    .flip-card-front span {
+      font-size: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .flip-card-front, .flip-card-back {
+      border-width: 2px;
+      border-radius: 8px;
+    }
+    .flip-card-back::after {
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      bottom: 3px;
+      right: 3px;
+    }
+  }
+
+  /* --- Маленький телефон: 480px и меньше --- */
+  @media (max-width: 480px) {
+    .hero h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
+    .hero p { font-size: 0.9rem; }
+
+    .photo-decor { display: none; }
+    .photo-wrapper { max-width: 260px; }
+
+    .counter {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .counter-num { font-size: 1.5rem; }
+    .counter-label { font-size: 0.6rem; letter-spacing: 0.5px; }
+
+    .flip-card-front .icon { font-size: 1.2rem; }
+    .flip-card-front span { font-size: 0.45rem; }
+
+    .timeline-item {
+      padding: 15px 10px 15px 50px;
+    }
+    .timeline-item::after {
+      width: 28px;
+      height: 28px;
+      font-size: 12px;
+    }
+
+    .love-notes {
+      grid-template-columns: 1fr;
+    }
+
+    .surprise-btn {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 0.85rem;
+    }
+
+    .close { font-size: 32px; right: 15px; }
+  }
+
+  /* --- Очень маленький экран: 360px и меньше --- */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.3rem; }
+    .photo-wrapper { max-width: 220px; }
+    .counter-num { font-size: 1.3rem; }
+    .counter-label { font-size: 0.55rem; }
+    .section-title { font-size: 1.2rem; }
+    .flip-card-front span { display: none; }
+    .flip-card-front .icon { font-size: 1.4rem; }
+  }
+
+  /* --- Ландшафт на телефоне --- */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+      min-height: auto;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+
+  /* --- Reduced motion --- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Декоративные пятна -->
+<div class="bg-blob b1"></div>
+<div class="bg-blob b2"></div>
+
+<!-- Падающие сердечки -->
+<div class="hearts" id="hearts"></div>
+
+<!-- ГЛАВНАЯ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>С днём рождения, <span class="accent">пуся!</span> 🎂💕</h1>
+    <p>Этот маленький сайт — только для тебя.<br>
+       Здесь наша история, наши моменты и все чувства,<br>
+       которые я не всегда умею сказать вслух.</p>
+    <p>Спасибо, что ты рядом. Спасибо, что ты <em>мой</em>.</p>
+    <div class="scroll-hint">↓</div>
+  </div>
+
+  <div class="hero-photo">
+    <span class="photo-decor d1">❤</span>
+    <span class="photo-decor d2">💕</span>
+    <span class="photo-decor d3">🌸</span>
+    <span class="photo-decor d4">✨</span>
+    <span class="photo-decor d5">💗</span>
+
+    <div class="photo-wrapper">
+      <span class="photo-badge">18 · 12 · 2024</span>
+      
+      <div class="photo-frame">
+        <img src="side-photo.jpg" alt="love" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;width:100%;height:100%;background:linear-gradient(135deg,#e07570,#8b1a17);display:flex;align-items:center;justify-content:center;font-size:5rem;color:#fff;border-radius:8px;&quot;>❤</div>'">
+        
+        <div class="photo-tape tape-left"></div>
+        <div class="photo-tape tape-right"></div>
+        <div class="photo-sticker">💋</div>
+        <div class="photo-note">Ты — моё всё 💕</div>
+        
+      </div>
+      
+      <div class="photo-caption">
+        <span class="caption-heart">❤</span>
+        моя любовь — навсегда
+        <span class="caption-heart">❤</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">❦ ❦ ❦</div>
+
+<!-- СЧЁТЧИК (годы / месяцы / дни) -->
+<section class="counter-section">
+  <h2 class="section-title">Мы вместе уже...</h2>
+  <p class="section-subtitle">с 18 декабря 2024 года — и это только начало</p>
+  <div class="counter">
+    <div class="counter-item">
+      <span class="counter-num" id="years">0</span>
+      <span class="counter-label" id="years-label">лет</span>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" id="months">0</span>
+      <span class="counter-label" id="months-label">месяцев</span>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" id="days">0</span>
+      <span class="counter-label" id="days-label">дней</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider">❦ ❦ ❦</div>
+
+<!-- ВРЕМЕННАЯ ШКАЛА -->
+<section>
+  <h2 class="section-title">Наша история 💫</h2>
+  <p class="section-subtitle">каждый момент с тобой — мой любимый</p>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-card">
+        <div class="timeline-date">18 декабря 2024</div>
+        <h3>Начало 💕</h3>
+        <p>Ты предложил мне встречаться. Я так растерялась, что даже не поняла, что ты сказал.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-card">
+        <div class="timeline-date">Наши первые дни</div>
+        <h3>Первое «вместе» 🌹</h3>
+        <p>После твоего приезда я была такой растерянной, что не знала, как реагировать.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-card">
+        <div class="timeline-date">Наши признания</div>
+        <h3>Три заветных слова 💗</h3>
+        <p>Когда мы друг другу сказали три заветных слова — это был взрыв эмоций и стеснения.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-card">
+        <div class="timeline-date">Наше сегодня</div>
+        <h3>Каждый день влюбляюсь заново 💘</h3>
+        <p>Это бытовуха, которая сменяется приливами любви.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">❦ ❦ ❦</div>
+
+<!-- ГАЛЕРЕЯ (4 В РЯД ВСЕГДА) -->
+<section>
+  <h2 class="section-title">Наши моменты 📸</h2>
+  <p class="section-subtitle">нажми на иконку, чтобы перевернуть и увидеть фото</p>
+  <div class="gallery">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">💖</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo1.jpg" alt="Момент 1" onerror="this.replaceWith('💑')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">🌹</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo2.jpg" alt="Момент 2" onerror="this.replaceWith('🌹')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">💕</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo3.jpg" alt="Момент 3" onerror="this.replaceWith('💕')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">✨</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo4.jpg" alt="Момент 4" onerror="this.replaceWith('✨')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">😍</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo5.jpg" alt="Момент 5" onerror="this.replaceWith('😍')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">🥰</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo6.jpg" alt="Момент 6" onerror="this.replaceWith('🥰')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">💖</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo7.jpg" alt="Момент 7" onerror="this.replaceWith('💖')">
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <span class="icon">🌸</span>
+          <span>Нажми</span>
+        </div>
+        <div class="flip-card-back">
+          <img src="photo8.jpg" alt="Момент 8" onerror="this.replaceWith('🌸')">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">❦ ❦ ❦</div>
+
+<!-- ЗАПИСКИ -->
+<section>
+  <h2 class="section-title">За что я тебя люблю 💖</h2>
+  <p class="section-subtitle">бесконечный список, но вот главное</p>
+  <div class="love-notes">
+    <div class="note">За твою улыбку, от которой у меня внутри всё переворачивается.</div>
+    <div class="note">За то, что ты умеешь слушать — по-настоящему, а не просто «да-да».</div>
+    <div class="note">За твои объятия — в них я чувствую себя дома.</div>
+    <div class="note">За твоё чувство юмора, из-за которого мы смеёмся как дети.</div>
+    <div class="note">За то, что рядом с тобой можно быть собой — настоящей.</div>
+    <div class="note">За тысячи причин и ни одной — просто потому что это ты.</div>
+  </div>
+</section>
+
+<div class="divider">❦ ❦ ❦</div>
+
+<!-- ФИНАЛ -->
+<section class="finale">
+  <h2>И это только <span class="accent">начало</span> ✨</h2>
+  <button class="surprise-btn" onclick="showSurprise()">Нажми, тут сюрприз 🎁</button>
+  <div class="surprise-message" id="surprise">
+    💌 Ты — лучшее, что случилось со мной.<br><br>
+    Спасибо, что ты мой. Я хочу провести с тобой ещё миллион таких же дней и ночей.<br><br>
+    С днём рождения, пуся! С любовью, твоя сладуся 💕
+  </div>
+</section>
+
+<!-- ЛАЙТБОКС -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img" alt="Увеличенное фото">
+</div>
+
+<script>
+  // ---------- Подсчёт стажа отношений (годы / месяцы / дни) ----------
+  const START_DATE = new Date(2024, 11, 18); // 18 декабря 2024
+
+  function updateCounter() {
+    const now = new Date();
+
+    let years = now.getFullYear() - START_DATE.getFullYear();
+    let months = now.getMonth() - START_DATE.getMonth();
+    let days = now.getDate() - START_DATE.getDate();
+
+    // Если дни отрицательные — занимаем у предыдущего месяца
+    if (days < 0) {
+      months--;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+
+    // Если месяцы отрицательные — занимаем у года
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    document.getElementById('years').textContent = years;
+    document.getElementById('months').textContent = months;
+    document.getElementById('days').textContent = days;
+
+    // Склонения
+    const yearsLabel = document.getElementById('years-label');
+    const monthsLabel = document.getElementById('months-label');
+    const daysLabel = document.getElementById('days-label');
+
+    yearsLabel.textContent = plural(years, ['год', 'года', 'лет']);
+    monthsLabel.textContent = plural(months, ['месяц', 'месяца', 'месяцев']);
+    daysLabel.textContent = plural(days, ['день', 'дня', 'дней']);
+  }
+
+  // Правильные склонения
+  function plural(n, forms) {
+    n = Math.abs(n) % 100;
+    const n1 = n % 10;
+    if (n > 10 && n < 20) return forms[2];
+    if (n1 > 1 && n1 < 5) return forms[1];
+    if (n1 === 1) return forms[0];
+    return forms[2];
+  }
+
+  updateCounter();
+
+  // ---------- Падающие сердечки ----------
+  const heartsContainer = document.getElementById('hearts');
+  const heartSymbols = ['❤', '💕', '💖', '💗', '💘', '🌸', '🤍'];
+  const isSmallScreen = window.innerWidth < 768;
+
+  function createHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.fontSize = (Math.random() * 18 + 12) + 'px';
+    h.style.animationDuration = (Math.random() * 6 + 7) + 's';
+    h.style.animationDelay = Math.random() * 2 + 's';
+    heartsContainer.appendChild(h);
+    setTimeout(() => h.remove(), 15000);
+  }
+
+  setInterval(createHeart, isSmallScreen ? 900 : 500);
+  for (let i = 0; i < (isSmallScreen ? 5 : 10); i++) setTimeout(createHeart, i * 200);
+
+  // ---------- Появление блоков таймлайна ----------
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+  // ---------- Кнопка сюрприза ----------
+  function showSurprise() {
+    const el = document.getElementById('surprise');
+    el.classList.toggle('show');
+    if (el.classList.contains('show')) {
+      for (let i = 0; i < 30; i++) setTimeout(createHeart, i * 60);
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // ---------- ЛОГИКА ПЕРЕВЁРТЫШЕЙ И ЛАЙТБОКСА ----------
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = document.querySelector('.close');
+
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.tagName === 'IMG') return;
+      this.classList.toggle('flipped');
+    });
+  });
+
+  document.querySelectorAll('.flip-card-back img').forEach(img => {
+    img.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (this.src && this.src !== '') {
+        lightboxImg.src = this.src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => { lightboxImg.src = ''; }, 300);
+  }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target !== lightboxImg) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+</script>
+</body>
+</html>
